@@ -71,7 +71,7 @@ class CategoriesController extends Controller
             return Redirect::route('categories.index')
                     ->with('success', Alert::format('Completed!', 'Category was updated.'));
         } else {
-            Log::info("Category was not updated - 0".$response['error']);
+            Log::info("Category was not updated - ".$response['error']);
 
             return Redirect::back()
                     ->with('error', Alert::format('Error!', $response['error']))

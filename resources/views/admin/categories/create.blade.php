@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-12" style="margin-bottom: 20px;">
-        <a class="btn btn-grey btn-sm" href="{{ route('administrators.index') }}"><i class="fas fa-times"></i> Cancel</a>
+        <a class="btn btn-grey btn-sm" href="{{ route('categories.index') }}"><i class="fas fa-times"></i> Cancel</a>
     </div>
 </div>
 <div class="row">

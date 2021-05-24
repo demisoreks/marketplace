@@ -6,6 +6,8 @@ use App\Core\Administrators\Administrator;
 use App\Core\Administrators\IAdministrator;
 use App\Core\Categories\Category;
 use App\Core\Categories\ICategory;
+use App\Core\Versions\IVersion;
+use App\Core\Versions\Version;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(IAdministrator::class, Administrator::class);
         $this->app->bind(ICategory::class, Category::class);
+        $this->app->bind(IVersion::class, Version::class);
     }
 
     /**

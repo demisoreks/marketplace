@@ -181,6 +181,7 @@
                                 <div class="card-body">
                                     <nav class="nav flex-column">
                                         <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
+                                        <a class="nav-link" href="{{ route('versions.index') }}">Versions</a>
                                         <a class="nav-link" href="{{ route('administrators.index') }}">Administrators</a>
                                     </nav>
                                 </div>

@@ -53,5 +53,16 @@ Route::prefix('admin')->group(function () {
         Route::bind('categories', function ($value, $route) {
             return App\DCategory::findBySlug($value)->first();
         });
+
+        Route::resource('versions', 'VersionsController');
+        Route::get('versions/{version}/disable', [
+            'as' => 'versions.disable', 'uses' => 'VersionsController@disable'
+        ]);
+        Route::get('versions/{version}/enable', [
+            'as' => 'versions.enable', 'uses' => 'VersionsController@enable'
+        ]);
+        Route::bind('versions', function ($value, $route) {
+            return App\DVersion::findBySlug($value)->first();
+        });
     });
 });
