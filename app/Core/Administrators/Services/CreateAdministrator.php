@@ -9,9 +9,9 @@ trait CreateAdministrator {
 
     public function createAdministrator($data) {
         $response = [];
-        $recordCheck = DbRecord::check('administrators', ['email' => $data['email']]);
-        if ($recordCheck != "") {
-            $response['error'] = $recordCheck;
+        $record_check = DbRecord::check('administrators', ['email' => $data['email']]);
+        if ($record_check != "") {
+            $response['error'] = $record_check;
         } else {
             $administrator = DAdministrator::create($data);
             if ($administrator) {

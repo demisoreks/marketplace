@@ -157,14 +157,14 @@
                             <div class="card-header bg-white" id="heading1" style="padding: 0;">
                                 <h5 class="mb-0">
                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                        <strong>General Menu</strong>
+                                        <strong>Product Menu</strong>
                                     </button>
                                 </h5>
                             </div>
-                            <div id="collapse1" class="collapse @if ($menu == 'general') show @endif" aria-labelledby="heading1" data-parent="#accordion">
+                            <div id="collapse1" class="collapse @if ($menu == 'product') show @endif" aria-labelledby="heading1" data-parent="#accordion">
                                 <div class="card-body">
                                     <nav class="nav flex-column">
-                                        <a class="nav-link active" href="{{ route('admin_dashboard') }}">Dashboard</a>
+                                        <a class="nav-link active" href="{{ route('admin_dashboard') }}"><i class="fa fa-chart-line"></i> Dashboard</a>
                                     </nav>
                                 </div>
                             </div>
@@ -180,9 +180,9 @@
                             <div id="collapse2" class="collapse @if ($menu == 'settings') show @endif" aria-labelledby="heading2" data-parent="#accordion">
                                 <div class="card-body">
                                     <nav class="nav flex-column">
-                                        <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
-                                        <a class="nav-link" href="{{ route('versions.index') }}">Versions</a>
-                                        <a class="nav-link" href="{{ route('administrators.index') }}">Administrators</a>
+                                        <a class="nav-link" href="{{ route('categories.index') }}"><i class="fa fa-tag"></i> Categories</a>
+                                        <a class="nav-link" href="{{ route('versions.index') }}"><i class="fa fa-server"></i> Versions</a>
+                                        <a class="nav-link" href="{{ route('administrators.index') }}"><i class="fa fa-user"></i> Administrators</a>
                                     </nav>
                                 </div>
                             </div>

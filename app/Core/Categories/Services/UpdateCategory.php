@@ -9,9 +9,9 @@ trait UpdateCategory {
 
     public function updateCategory(DCategory $category, $data) {
         $response = [];
-        $recordCheck = DbRecord::checkExcept('categories', ['name' => $data['name']], 'id', $category->id);
-        if ($recordCheck != "") {
-            $repsonse['error'] = $recordCheck;
+        $record_check = DbRecord::checkExcept('categories', ['name' => $data['name']], 'id', $category->id);
+        if ($record_check != "") {
+            $repsonse['error'] = $record_check;
         } else {
             if ($category->update($data)) {
                 $response['data'] = $category;

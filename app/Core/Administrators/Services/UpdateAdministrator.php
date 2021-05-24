@@ -9,9 +9,9 @@ trait UpdateAdministrator {
 
     public function updateAdministrator(DAdministrator $administrator, $data) {
         $response = [];
-        $recordCheck = DbRecord::checkExcept('administrators', ['email' => $data['email']], 'id', $administrator->id);
-        if ($recordCheck != "") {
-            $response['error'] = $recordCheck;
+        $record_check = DbRecord::checkExcept('administrators', ['email' => $data['email']], 'id', $administrator->id);
+        if ($record_check != "") {
+            $response['error'] = $record_check;
         } else {
             if ($administrator->update($data)) {
                 $response['data'] = $administrator;

@@ -9,9 +9,9 @@ trait UpdateVersion {
 
     public function updateVersion(DVersion $version, $data) {
         $response = [];
-        $recordCheck = DbRecord::checkExcept('versions', ['name' => $data['name']], 'id', $version->id);
-        if ($recordCheck != "") {
-            $response['error'] = $recordCheck;
+        $record_check = DbRecord::checkExcept('versions', ['name' => $data['name']], 'id', $version->id);
+        if ($record_check != "") {
+            $response['error'] = $record_check;
         } else {
             if ($version->update($data)) {
                 $response['data'] = $version;

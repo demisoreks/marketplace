@@ -9,9 +9,9 @@ trait CreateVersion {
 
     public function createVersion($data) {
         $response = [];
-        $recordCheck = DbRecord::check('versions', ['name' => $data['name']]);
-        if ($recordCheck != "") {
-            $response['error'] = $recordCheck;
+        $record_check = DbRecord::check('versions', ['name' => $data['name']]);
+        if ($record_check != "") {
+            $response['error'] = $record_check;
         } else {
             $version = DVersion::create($data);
             if ($version) {

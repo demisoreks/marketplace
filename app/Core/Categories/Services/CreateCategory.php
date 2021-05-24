@@ -9,9 +9,9 @@ trait CreateCategory {
 
     public function createCategory($data) {
         $response = [];
-        $recordCheck = DbRecord::check('categories', ['name' => $data['name']]);
-        if ($recordCheck != "") {
-            $response['error'] = $recordCheck;
+        $record_check = DbRecord::check('categories', ['name' => $data['name']]);
+        if ($record_check != "") {
+            $response['error'] = $record_check;
         } else {
             $category = DCategory::create($data);
             if ($category) {
