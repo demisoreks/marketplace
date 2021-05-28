@@ -40,10 +40,20 @@
                         @include('commons.alert')
                         {!! Form::open(['route' => ['admin_authenticate'], 'class' => 'form-group', 'method' => 'post']) !!}
                         <div class="form-group" style="margin-bottom: 30px;">
-                            {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email Address', 'required' => true]) !!}
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email Address']) !!}
+                            </div>
                         </div>
                         <div class="form-group" style="margin-bottom: 30px;">
-                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'required' => true]) !!}
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                </div>
+                                {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'required' => true]) !!}
+                            </div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-block" style="color: #fff; background-color: {{ env('BRAND_COLOUR_1') }};">Log In</button>

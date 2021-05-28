@@ -12,57 +12,105 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [
-    'as' => 'index', 'uses' => 'MainController@index'
+Route::get('configuration', [
+    'as' => 'configuration', 'uses' => 'ConfigurationController@index'
+]);
+Route::post('configuration/store', [
+    'as' => 'configuration.store', 'uses' => 'ConfigurationController@store'
 ]);
 
-Route::prefix('admin')->group(function () {
+Route::middleware('check.config')->group(function () {
     Route::get('/', [
-        'as' => 'admin_index', 'uses' => 'AdminMainController@index'
+        'as' => 'index', 'uses' => 'MainController@index'
     ]);
-    Route::post('authenticate', [
-        'as' => 'admin_authenticate', 'uses' => 'AdminAuthenticateController@authenticate'
-    ]);
-    Route::get('logout', [
-        'as' => 'admin_logout', 'uses' => 'AdminAuthenticateController@logout'
-    ]);
-    Route::middleware('check.admin')->group(function () {
-        Route::get('dashboard', [
-            'as' => 'admin_dashboard', 'uses' => 'AdminMainController@dashboard'
-        ]);
 
-        Route::resource('administrators', 'AdministratorsController');
-        Route::get('administrators/{administrator}/disable', [
-            'as' => 'administrators.disable', 'uses' => 'AdministratorsController@disable'
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [
+            'as' => 'admin_index', 'uses' => 'AdminMainController@index'
         ]);
-        Route::get('administrators/{administrator}/enable', [
-            'as' => 'administrators.enable', 'uses' => 'AdministratorsController@enable'
+        Route::post('authenticate', [
+            'as' => 'admin_authenticate', 'uses' => 'AdminAuthenticateController@authenticate'
         ]);
-        Route::bind('administrators', function ($value, $route) {
-            return App\DAdministrator::findBySlug($value)->first();
-        });
+        Route::get('logout', [
+            'as' => 'admin_logout', 'uses' => 'AdminAuthenticateController@logout'
+        ]);
+        Route::middleware('check.admin')->group(function () {
+            Route::get('dashboard', [
+                'as' => 'admin_dashboard', 'uses' => 'AdminMainController@dashboard'
+            ]);
 
-        Route::resource('categories', 'CategoriesController');
-        Route::get('categories/{category}/disable', [
-            'as' => 'categories.disable', 'uses' => 'CategoriesController@disable'
-        ]);
-        Route::get('categories/{category}/enable', [
-            'as' => 'categories.enable', 'uses' => 'CategoriesController@enable'
-        ]);
-        Route::bind('categories', function ($value, $route) {
-            return App\DCategory::findBySlug($value)->first();
-        });
+            Route::get('configuration', [
+                'as' => 'configuration.edit', 'uses' => 'ConfigurationController@edit'
+            ]);
+            Route::put('configuration/update', [
+                'as' => 'configuration.update', 'uses' => 'ConfigurationController@update'
+            ]);
 
-        Route::resource('versions', 'VersionsController');
-        Route::get('versions/{version}/disable', [
-            'as' => 'versions.disable', 'uses' => 'VersionsController@disable'
-        ]);
-        Route::get('versions/{version}/enable', [
-            'as' => 'versions.enable', 'uses' => 'VersionsController@enable'
-        ]);
-        Route::bind('versions', function ($value, $route) {
-            return App\DVersion::findBySlug($value)->first();
+            Route::resource('administrators', 'AdministratorsController');
+            Route::get('administrators/{administrator}/disable', [
+                'as' => 'administrators.disable', 'uses' => 'AdministratorsController@disable'
+            ]);
+            Route::get('administrators/{administrator}/enable', [
+                'as' => 'administrators.enable', 'uses' => 'AdministratorsController@enable'
+            ]);
+            Route::bind('administrators', function ($value, $route) {
+                return App\DAdministrator::findBySlug($value)->first();
+            });
+
+            Route::resource('categories', 'CategoriesController');
+            Route::get('categories/{category}/disable', [
+                'as' => 'categories.disable', 'uses' => 'CategoriesController@disable'
+            ]);
+            Route::get('categories/{category}/enable', [
+                'as' => 'categories.enable', 'uses' => 'CategoriesController@enable'
+            ]);
+            Route::bind('categories', function ($value, $route) {
+                return App\DCategory::findBySlug($value)->first();
+            });
+
+            Route::resource('versions', 'VersionsController');
+            Route::get('versions/{version}/disable', [
+                'as' => 'versions.disable', 'uses' => 'VersionsController@disable'
+            ]);
+            Route::get('versions/{version}/enable', [
+                'as' => 'versions.enable', 'uses' => 'VersionsController@enable'
+            ]);
+            Route::bind('versions', function ($value, $route) {
+                return App\DVersion::findBySlug($value)->first();
+            });
+
+            Route::resource('billing_intervals', 'BillingIntervalsController');
+            Route::get('billing_intervals/{billing_interval}/disable', [
+                'as' => 'billing_intervals.disable', 'uses' => 'BillingIntervalsController@disable'
+            ]);
+            Route::get('billing_intervals/{billing_interval}/enable', [
+                'as' => 'billing_intervals.enable', 'uses' => 'BillingIntervalsController@enable'
+            ]);
+            Route::bind('billing_intervals', function ($value, $route) {
+                return App\DBillingInterval::findBySlug($value)->first();
+            });
+
+            Route::resource('vendors', 'VendorsController');
+            Route::get('vendors/{vendor}/disable', [
+                'as' => 'vendors.disable', 'uses' => 'VendorsController@disable'
+            ]);
+            Route::get('vendors/{vendor}/enable', [
+                'as' => 'vendors.enable', 'uses' => 'VendorsController@enable'
+            ]);
+            Route::bind('vendors', function ($value, $route) {
+                return App\DVendor::findBySlug($value)->first();
+            });
+
+            Route::resource('languages', 'LanguagesController');
+            Route::get('languages/{language}/disable', [
+                'as' => 'languages.disable', 'uses' => 'LanguagesController@disable'
+            ]);
+            Route::get('languages/{language}/enable', [
+                'as' => 'languages.enable', 'uses' => 'LanguagesController@enable'
+            ]);
+            Route::bind('languages', function ($value, $route) {
+                return App\DLanguage::findBySlug($value)->first();
+            });
         });
     });
 });

@@ -126,7 +126,7 @@
         </script>
     </head>
     <body style="background-color: #f6f7fb;">
-        <div class="container-fluid" style="height: 100vh;">
+        <div class="container-fluid" style="min-height: 100vh;">
             <div class="row sticky-top shadow-sm bg-white" style="height: 70px; border-bottom: 1px solid {{ env('BRAND_COLOUR_1') }};">
                 <div class="col-md-6">
                     <div class="text-white float-left" style="display: flex; align-items: center; justify-content: center; height: 100%;">
@@ -180,8 +180,12 @@
                             <div id="collapse2" class="collapse @if ($menu == 'settings') show @endif" aria-labelledby="heading2" data-parent="#accordion">
                                 <div class="card-body">
                                     <nav class="nav flex-column">
+                                        <a class="nav-link" href="{{ route('configuration.edit') }}"><i class="fa fa-cog"></i> Configuration</a>
+                                        <a class="nav-link" href="{{ route('vendors.index') }}"><i class="fa fa-industry"></i> Vendors</a>
                                         <a class="nav-link" href="{{ route('categories.index') }}"><i class="fa fa-tag"></i> Categories</a>
                                         <a class="nav-link" href="{{ route('versions.index') }}"><i class="fa fa-server"></i> Versions</a>
+                                        <a class="nav-link" href="{{ route('billing_intervals.index') }}"><i class="fa fa-clock"></i> Billing Intervals</a>
+                                        <a class="nav-link" href="{{ route('languages.index') }}"><i class="fa fa-language"></i> Languages</a>
                                         <a class="nav-link" href="{{ route('administrators.index') }}"><i class="fa fa-user"></i> Administrators</a>
                                     </nav>
                                 </div>
