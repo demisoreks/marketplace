@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-12" style="margin-bottom: 20px;">
-        <a class="btn btn-sm" href="{{ route('categories.create') }}" style="background-color: {{ env('BRAND_COLOUR_1') }}; color: #fff;"><i class="fas fa-plus"></i> New Category</a>
+        <a class="btn btn-sm" href="{{ route('categories.create') }}" style="background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }}; color: #fff;"><i class="fas fa-plus"></i> New Category</a>
     </div>
 </div>
 <div class="row">
@@ -32,10 +32,10 @@
                                 @foreach ($active_categories as $category)
                                 <tr>
                                     <td>{{ $category->name }}</td>
-                                    <td class="text-center">{{ Html::image($category->logo_url, 'Logo', ['height' => '50px']) }}</td>
-                                    <td class="text-center">{{ Html::image($category->image_url, 'Image', ['height' => '100px']) }}</td>
+                                    <td class="text-center">@if ($category->logo_url) {{ Html::image($category->logo_url, 'Logo', ['height' => '50px']) }} @endif</td>
+                                    <td class="text-center">@if ($category->image_url) {{ Html::image($category->image_url, 'Image', ['height' => '100px']) }} @endif</td>
                                     <td class="text-center">
-                                        <a title="Edit" href="{{ route('categories.edit', [$category->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                                        <a title="Edit" href="{{ route('categories.edit', [$category->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                                         <a title="Disable" href="{{ route('categories.disable', [$category->slug()]) }}" onclick="return confirmDisable()"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
@@ -68,10 +68,10 @@
                                 @foreach ($disabled_categories as $category)
                                 <tr>
                                     <td>{{ $category->name }}</td>
-                                    <td class="text-center">{{ Html::image($category->logo_url, 'Logo', ['height' => '50px']) }}</td>
-                                    <td class="text-center">{{ Html::image($category->image_url, 'Image', ['height' => '100px']) }}</td>
+                                    <td class="text-center">@if ($category->logo_url) {{ Html::image($category->logo_url, 'Logo', ['height' => '50px']) }} @endif</td>
+                                    <td class="text-center">@if ($category->image_url) {{ Html::image($category->image_url, 'Image', ['height' => '100px']) }} @endif</td>
                                     <td class="text-center">
-                                        <a title="Enable" href="{{ route('categories.enable', [$category->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-undo"></i></a>
+                                        <a title="Enable" href="{{ route('categories.enable', [$category->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-undo"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

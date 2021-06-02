@@ -28,4 +28,17 @@ class DbRecord {
         }
         return $response;
     }
+
+    public static function checkCombined($tableName, $fields) {
+        $response = "";
+        $fieldKeys = array_keys($fields);
+        $record = DB::table($tableName);
+        foreach ($fieldKeys as $key) {
+            $record = $record->where($key, $fields[$key]);
+        }
+        if ($record->count() > 0) {
+            $response .= "A similar record already exists.";
+        }
+        return $response;
+    }
 }

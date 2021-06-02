@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Core\Services\Configuration;
 use Closure;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Schema;
 
@@ -23,8 +24,11 @@ class CheckConfiguration
             Artisan::call('migrate', ['--path' => 'database/migrations', '--force' => true]);
         }
 
-        if (Configuration::get() == null) {
+        $configuration = Configuration::get();
+        if ($configuration == null) {
             return Redirect::route('configuration');
+        } else {
+            Cookie::queue('configuration', $configuration, 60);
         }
 
         return $next($request);

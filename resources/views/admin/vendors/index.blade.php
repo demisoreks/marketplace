@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-12" style="margin-bottom: 20px;">
-        <a class="btn btn-sm" href="{{ route('vendors.create') }}" style="background-color: {{ env('BRAND_COLOUR_1') }}; color: #fff;"><i class="fas fa-plus"></i> New Vendor</a>
+        <a class="btn btn-sm" href="{{ route('vendors.create') }}" style="background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }}; color: #fff;"><i class="fas fa-plus"></i> New Vendor</a>
     </div>
 </div>
 <div class="row">
@@ -31,7 +31,7 @@
                                 <tr>
                                     <td>{{ $vendor->name }}</td>
                                     <td class="text-center">
-                                        <a title="Edit" href="{{ route('vendors.edit', [$vendor->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                                        <a title="Edit" href="{{ route('vendors.edit', [$vendor->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                                         <a title="Disable" href="{{ route('vendors.disable', [$vendor->slug()]) }}" onclick="return confirmDisable()"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
@@ -63,7 +63,7 @@
                                 <tr>
                                     <td>{{ $vendor->name }}</td>
                                     <td class="text-center">
-                                        <a title="Enable" href="{{ route('vendors.enable', [$vendor->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-undo"></i></a>
+                                        <a title="Enable" href="{{ route('vendors.enable', [$vendor->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-undo"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

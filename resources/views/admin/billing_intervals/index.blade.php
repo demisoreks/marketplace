@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-12" style="margin-bottom: 20px;">
-        <a class="btn btn-sm" href="{{ route('billing_intervals.create') }}" style="background-color: {{ env('BRAND_COLOUR_1') }}; color: #fff;"><i class="fas fa-plus"></i> New Billing Interval</a>
+        <a class="btn btn-sm" href="{{ route('billing_intervals.create') }}" style="background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }}; color: #fff;"><i class="fas fa-plus"></i> New Billing Interval</a>
     </div>
 </div>
 <div class="row">
@@ -33,7 +33,7 @@
                                     <td class="text-center">{{ $billing_interval->months }}</td>
                                     <td>{{ $billing_interval->name }}</td>
                                     <td class="text-center">
-                                        <a title="Edit" href="{{ route('billing_intervals.edit', [$billing_interval->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                                        <a title="Edit" href="{{ route('billing_intervals.edit', [$billing_interval->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                                         <a title="Disable" href="{{ route('billing_intervals.disable', [$billing_interval->slug()]) }}" onclick="return confirmDisable()"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
@@ -67,7 +67,7 @@
                                     <td class="text-center">{{ $billing_interval->months }}</td>
                                     <td>{{ $billing_interval->name }}</td>
                                     <td class="text-center">
-                                        <a title="Enable" href="{{ route('billing_intervals.enable', [$billing_interval->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-undo"></i></a>
+                                        <a title="Enable" href="{{ route('billing_intervals.enable', [$billing_interval->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-undo"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

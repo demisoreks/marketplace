@@ -60,7 +60,7 @@
         {!! Form::text('logo_url', $value = null, ['class' => 'form-control', 'placeholder' => 'Logo URL', 'required' => true]) !!}
     </div>
 </div>
-@if (App\DConfiguration::whereId(1)->count() == 0)
+@if (App\Core\Services\Configuration::get() == null)
 <legend style="margin-bottom: 0;">Administrator Details</legend>
 <span class="text-danger">These details will be used to create the first administrator account<br /><br /></span>
 <div class="form-group row">
@@ -84,6 +84,10 @@
 @endif
 <div class="form-group row">
     <div class="col-md-10 offset-md-2">
-        <button type="submit" class="btn btn-sm" style="color: #fff; background-color: {{ env('BRAND_COLOUR_1') }};">{{ $submit_text }}</button>
+        @if (App\Core\Services\Configuration::get() == null)
+        <button type="submit" class="btn btn-sm btn-secondary">{{ $submit_text }}</button>
+        @else
+        <button type="submit" class="btn btn-sm" style="color: #fff; background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};">{{ $submit_text }}</button>
+        @endif
     </div>
 </div>

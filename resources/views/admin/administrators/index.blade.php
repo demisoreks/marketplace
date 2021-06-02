@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-12" style="margin-bottom: 20px;">
-        <a class="btn btn-sm" href="{{ route('administrators.create') }}" style="background-color: {{ env('BRAND_COLOUR_1') }}; color: #fff;"><i class="fas fa-plus"></i> New Administrator</a>
+        <a class="btn btn-sm" href="{{ route('administrators.create') }}" style="background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }}; color: #fff;"><i class="fas fa-plus"></i> New Administrator</a>
     </div>
 </div>
 <div class="row">
@@ -35,7 +35,7 @@
                                     <td>{{ $administrator->email }}</td>
                                     <td>@if ($administrator->super) Yes @else No @endif</td>
                                     <td class="text-center">
-                                        <a title="Edit" href="{{ route('administrators.edit', [$administrator->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                                        <a title="Edit" href="{{ route('administrators.edit', [$administrator->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                                         <a title="Disable" href="{{ route('administrators.disable', [$administrator->slug()]) }}" onclick="return confirmDisable()"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
@@ -71,7 +71,7 @@
                                     <td>{{ $administrator->email }}</td>
                                     <td>@if ($administrator->super) Yes @else No @endif</td>
                                     <td class="text-center">
-                                        <a title="Enable" href="{{ route('administrators.enable', [$administrator->slug()]) }}" style="color: {{ env('BRAND_COLOUR_1') }};"><i class="fas fa-undo"></i></a>
+                                        <a title="Enable" href="{{ route('administrators.enable', [$administrator->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-undo"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

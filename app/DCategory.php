@@ -12,4 +12,8 @@ class DCategory extends Model
     protected $table = "categories";
 
     protected $guarded = [];
+
+    public function productCategories() {
+        return $this->hasMany('App\DProductCategory');
+    }
 }

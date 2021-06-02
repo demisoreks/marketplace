@@ -12,4 +12,8 @@ class DVendor extends Model
     protected $table = "vendors";
 
     protected $guarded = [];
+
+    public function products() {
+        return $this->hasMany('App\DProduct');
+    }
 }

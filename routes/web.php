@@ -111,6 +111,47 @@ Route::middleware('check.config')->group(function () {
             Route::bind('languages', function ($value, $route) {
                 return App\DLanguage::findBySlug($value)->first();
             });
+
+            Route::resource('products', 'ProductsController');
+            Route::get('products/{product}/disable', [
+                'as' => 'products.disable', 'uses' => 'ProductsController@disable'
+            ]);
+            Route::get('products/{product}/enable', [
+                'as' => 'products.enable', 'uses' => 'ProductsController@enable'
+            ]);
+            Route::bind('products', function ($value, $route) {
+                return App\DProduct::findBySlug($value)->first();
+            });
+
+            Route::resource('products.product_categories', 'ProductCategoriesController');
+            Route::bind('product_categories', function ($value, $route) {
+                return App\DProductCategory::findBySlug($value)->first();
+            });
+
+            Route::resource('products.product_requirements', 'ProductRequirementsController');
+            Route::bind('product_requirements', function ($value, $route) {
+                return App\DProductRequirement::findBySlug($value)->first();
+            });
+
+            Route::resource('products.product_features', 'ProductFeaturesController');
+            Route::bind('product_features', function ($value, $route) {
+                return App\DProductFeature::findBySlug($value)->first();
+            });
+
+            Route::resource('products.product_languages', 'ProductLanguagesController');
+            Route::bind('product_languages', function ($value, $route) {
+                return App\DProductLanguage::findBySlug($value)->first();
+            });
+
+            Route::resource('products.product_versions', 'ProductVersionsController');
+            Route::bind('product_versions', function ($value, $route) {
+                return App\DProductVersion::findBySlug($value)->first();
+            });
+
+            Route::resource('products.product_plans', 'ProductPlansController');
+            Route::bind('product_plans', function ($value, $route) {
+                return App\DProductPlan::findBySlug($value)->first();
+            });
         });
     });
 });

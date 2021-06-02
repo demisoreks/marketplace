@@ -5,7 +5,7 @@
     <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="card" style="margin-bottom: 20px;">
             <div class="card-body text-center">
-                <a href="#">
+                <a href="{{ route('products.index') }}">
                     <h1><i class="fa fa-layer-group"></i></h1>
                     <h4><p>Products</p></h4>
                 </a>

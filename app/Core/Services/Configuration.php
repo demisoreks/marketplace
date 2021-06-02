@@ -7,7 +7,7 @@ use App\DConfiguration;
 class Configuration {
 
     public static function get() {
-        $configurations = DConfiguration::where('id', 1);
+        $configurations = DConfiguration::whereId(1);
         if ($configurations->count() == 0) {
             return null;
         } else {

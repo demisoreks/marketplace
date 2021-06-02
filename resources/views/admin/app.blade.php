@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name') }} Admin @if(isset($page_title)) {{ " | ".$page_title }} @endif</title>
+        <title></title>
 
         <!-- Fonts -->
         {!! Html::style("https://fonts.googleapis.com/css?family=Maven+Pro") !!}
@@ -35,26 +35,26 @@
             }
 
             a {
-                color: {{ env('BRAND_COLOUR_1') }};
+                color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};
             }
 
             a:hover {
-                color: {{ env('BRAND_COLOUR_2') }};
+                color: #{{ json_decode(Cookie::get('configuration'))->colour2 }};
             }
 
             .page-item.active .page-link {
                 color: #fff !important;
-                background-color: {{ env('BRAND_COLOUR_1') }} !important;
+                background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }} !important;
             }
 
             .page-link {
-                color: {{ env('BRAND_COLOUR_1') }} !important;
+                color: #{{ json_decode(Cookie::get('configuration'))->colour1 }} !important;
                 background-color: #fff !important;
             }
 
             .page-link:hover {
                 color: #fff !important;
-                background-color: {{ env('BRAND_COLOUR_1') }} !important;
+                background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }} !important;
             }
         </style>
 
@@ -127,10 +127,10 @@
     </head>
     <body style="background-color: #f6f7fb;">
         <div class="container-fluid" style="min-height: 100vh;">
-            <div class="row sticky-top shadow-sm bg-white" style="height: 70px; border-bottom: 1px solid {{ env('BRAND_COLOUR_1') }};">
+            <div class="row sticky-top shadow-sm bg-white" style="height: 70px; border-bottom: 1px solid #{{ json_decode(Cookie::get('configuration'))->colour1 }};">
                 <div class="col-md-6">
                     <div class="text-white float-left" style="display: flex; align-items: center; justify-content: center; height: 100%;">
-                        <h3  class="font-weight-bold" style="color: {{ env('BRAND_COLOUR_1') }};">{{ config('app.name') }} Admin</h3>
+                        <h3  class="font-weight-bold" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};">{{ json_decode(Cookie::get('configuration'))->name }} Admin</h3>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -164,7 +164,8 @@
                             <div id="collapse1" class="collapse @if ($menu == 'product') show @endif" aria-labelledby="heading1" data-parent="#accordion">
                                 <div class="card-body">
                                     <nav class="nav flex-column">
-                                        <a class="nav-link active" href="{{ route('admin_dashboard') }}"><i class="fa fa-chart-line"></i> Dashboard</a>
+                                        <a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fa fa-chart-line"></i> Dashboard</a>
+                                        <a class="nav-link" href="{{ route('products.index') }}"><i class="fa fa-layer-group"></i> Products</a>
                                     </nav>
                                 </div>
                             </div>
@@ -203,7 +204,7 @@
             </div>
             <div class="row">
                 <div class="col-12 justify-content-end text-right">
-                    <div style="border-top: 1px solid {{ env('BRAND_COLOUR_1') }}; margin-top: 20px; padding: 10px 0;">Powered by <a href="https://icit.ng" target="_blank">ICIT Solutions Nigeria</a></div>
+                    <div style="border-top: 1px solid #{{ json_decode(Cookie::get('configuration'))->colour1 }}; margin-top: 20px; padding: 10px 0;">Powered by <a href="https://icit.ng" target="_blank">ICIT Solutions Nigeria</a></div>
                 </div>
             </div>
         </div>
