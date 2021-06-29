@@ -8,4 +8,6 @@ interface IReseller {
 
     public function logout();
 
+    public function getId();
+
 }

@@ -26,17 +26,20 @@
                                     <th><strong>PHONE NUMBER</strong></th>
                                     <th><strong>EMAIL ADDRESS</strong></th>
                                     <th width="10%" data-priority="1">&nbsp;</th>
+                                    <th width="10%" data-priority="1">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($customers as $customer)
                                 <tr>
-                                    <td>{{ $customer->name }}</td>
+                                    <td>{{ $customer->companyName }}</td>
                                     <td>{{ $customer->phone }}</td>
                                     <td>{{ $customer->email }}</td>
+                                    <td>
+                                        <a class="btn btn-sm" href="{{ route('pos.customers.sales.store', [$customer->id]) }}" style="background-color: #{{ $site->getConfiguration()->colour1 }}; color: #fff;">Sell</a>
+                                    </td>
                                     <td class="text-center">
-                                        <a title="Edit" href="{{ route('customers.edit', [$customer->slug()]) }}" style="color: #{{ $site->getConfiguration()->colour1 }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                                        <a title="Disable" href="{{ route('customers.disable', [$customer->slug()]) }}" onclick="return confirmDisable()"><i class="fas fa-times"></i></a>
+                                        <a title="Edit" href="{{ route('pos.customers.edit', [$customer->id]) }}" style="color: #{{ $site->getConfiguration()->colour1 }};"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

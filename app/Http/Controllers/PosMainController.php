@@ -51,7 +51,7 @@ class PosMainController extends Controller
             }
         }
         $main_address = [
-            'address' => $request->address,
+            'street' => $request->address,
             'city' => $request->city,
             'state' => $request->state
         ];
@@ -81,6 +81,10 @@ class PosMainController extends Controller
             return Redirect::route('pos_index')
                 ->with('success', Alert::format('Your account has been created!', 'You can now start selling.'));
         }
+    }
+
+    public function update($id, Request $request) {
+        return Redirect::route('pos.customers.index');
     }
 
 }

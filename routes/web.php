@@ -192,6 +192,10 @@ Route::middleware('check.config')->group(function () {
             Route::resource('customers', 'PosCustomersController', [
                 'as' => 'pos'
             ]);
+
+            Route::resource('customers.sales', 'PosSalesController', [
+                'as' => 'pos'
+            ]);
         });
     });
 });

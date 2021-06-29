@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-12">
         <legend>Edit Customer</legend>
-        {!! Form::model($customer, ['route' => ['pos.customers.update', $vendor->id], 'class' => 'form-group']) !!}
+        {!! Form::model($customer, ['route' => ['pos.customers.update', $customer->id], 'class' => 'form-group']) !!}
         @method('PUT')
         @include('pos/customers/form', ['submit_text' => 'Update Customer'])
         {!! Form::close() !!}
