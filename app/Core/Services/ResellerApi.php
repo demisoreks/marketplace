@@ -51,8 +51,8 @@ class ResellerApi {
                 return null;
             }
         } catch (ClientException $e) {
-            //dd($e->getResponse()->getBody()->getContents());
-            return null;
+            dd($e->getResponse()->getBody()->getContents());
+            //return null;
         }
     }
 
@@ -62,6 +62,22 @@ class ResellerApi {
             $response = $this->client->request('POST', '/Auth', ['body' => $body]);
             if ($response->getStatusCode() == 200) {
                 return $response->getBody()->getContents();
+            } else {
+                return null;
+            }
+        } catch (ClientException $e) {
+            //dd($e->getResponse()->getBody()->getContents());
+            return null;
+        }
+    }
+
+    public function getAccount($id) {
+        $account = null;
+        try {
+            $response = $this->client->request('GET', '/Account\/'.$id);
+            if ($response->getStatusCode() == 200) {
+                $account = json_decode($response->getBody()->getContents());
+                return $account;
             } else {
                 return null;
             }

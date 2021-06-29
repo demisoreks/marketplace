@@ -136,7 +136,7 @@
                 <div class="col-md-6">
                     <div class="float-right" style="display: flex; align-items: center; justify-content: center; height: 100%;">
                         ​<span class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Cookie::get('icommerce_reseller') }}
+                            {{ Cookie::get('icommerce_reseller_name') }}
                         </span>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('pos_logout') }}"><i class="fas fa-sign-out-alt"></i> Log Out</a>

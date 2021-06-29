@@ -23,6 +23,7 @@ class CheckReseller
                     ->with('error', Alert::format('Oops!', 'You need to log in.'));
         }
         Cookie::queue('icommerce_reseller', Cookie::get('icommerce_reseller'), 60);
+        Cookie::queue('icommerce_reseller_name', Cookie::get('icommerce_reseller_name'), 60);
 
         return $next($request);
     }
