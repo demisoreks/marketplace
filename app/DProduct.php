@@ -40,4 +40,8 @@ class DProduct extends Model
     public function productPlans() {
         return $this->hasMany('App\DProductPlan');
     }
+
+    public function productFaqs() {
+        return $this->hasMany('App\DProductFaq');
+    }
 }

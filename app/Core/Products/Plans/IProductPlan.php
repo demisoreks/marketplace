@@ -11,6 +11,8 @@ interface IProductPlan {
 
     public function createProductPlan(DProduct $product, $data);
 
+    public function updateProductPlan(DProductPlan $product_plan, $data);
+
     public function delete(DProductPlan $product_plan);
 
 }

@@ -15,8 +15,8 @@ class CreateProductPlanCodesTable extends Migration
     {
         Schema::create('product_plan_codes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->bigInteger('product_plan_id')->unsigned();
+            $table->foreign('product_plan_id')->references('id')->on('product_plans');
             $table->bigInteger('billing_interval_id')->unsigned();
             $table->foreign('billing_interval_id')->references('id')->on('billing_intervals');
             $table->text('code');
@@ -31,6 +31,6 @@ class CreateProductPlanCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_plac_codes');
+        Schema::dropIfExists('product_plan_codes');
     }
 }

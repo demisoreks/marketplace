@@ -10,7 +10,7 @@ trait CreateProductPlan {
 
     public function createProductPlan(DProduct $product, $data) {
         $response = [];
-        $record_check = DbRecord::checkCombined('product_plans', ['product_id' => $product->id, 'plan' => $data['plan']]);
+        $record_check = DbRecord::checkCombined('product_plans', ['product_id' => $product->id, 'name' => $data['name']]);
         if ($record_check != "") {
             $response['error'] = $record_check;
         } else {

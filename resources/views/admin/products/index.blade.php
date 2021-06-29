@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-12" style="margin-bottom: 20px;">
-        <a class="btn btn-sm" href="{{ route('products.create') }}" style="background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }}; color: #fff;"><i class="fas fa-plus"></i> New Product</a>
+        <a class="btn btn-sm" href="{{ route('products.create') }}" style="background-color: #{{ $site->getConfiguration()->colour1 }}; color: #fff;"><i class="fas fa-plus"></i> New Product</a>
     </div>
 </div>
 <div class="row">
@@ -36,10 +36,10 @@
                                     <td class="text-center">@if ($product->logo_url) {{ Html::image($product->logo_url, 'Logo', ['height' => '50px']) }} @endif</td>
                                     <td class="text-center">@if ($product->image_url) {{ Html::image($product->image_url, 'Image', ['height' => '100px']) }} @endif</td>
                                     <td class="text-center">
-                                        <a title="Details" href="{{ route('products.show', [$product->slug()]) }}" class="btn btn-block btn-sm" style="background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }}; color: #fff;">Details</a>
+                                        <a title="Details" href="{{ route('products.show', [$product->slug()]) }}" class="btn btn-block btn-sm" style="background-color: #{{ $site->getConfiguration()->colour1 }}; color: #fff;">Details</a>
                                     </td>
                                     <td class="text-center">
-                                        <a title="Edit" href="{{ route('products.edit', [$product->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                                        <a title="Edit" href="{{ route('products.edit', [$product->slug()]) }}" style="color: #{{ $site->getConfiguration()->colour1 }};"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                                         <a title="Disable" href="{{ route('products.disable', [$product->slug()]) }}" onclick="return confirmDisable()"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
@@ -76,10 +76,10 @@
                                     <td class="text-center">@if ($product->logo_url) {{ Html::image($product->logo_url, 'Logo', ['height' => '50px']) }} @endif</td>
                                     <td class="text-center">@if ($product->image_url) {{ Html::image($product->image_url, 'Image', ['height' => '100px']) }} @endif</td>
                                     <td class="text-center">
-                                        <a title="Details" href="{{ route('products.show', [$product->slug()]) }}" class="btn btn-block btn-sm" style="background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }}; color: #fff;">Details</a>
+                                        <a title="Details" href="{{ route('products.show', [$product->slug()]) }}" class="btn btn-block btn-sm" style="background-color: #{{ $site->getConfiguration()->colour1 }}; color: #fff;">Details</a>
                                     </td>
                                     <td class="text-center">
-                                        <a title="Enable" href="{{ route('products.enable', [$product->slug()]) }}" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};"><i class="fas fa-undo"></i></a>
+                                        <a title="Enable" href="{{ route('products.enable', [$product->slug()]) }}" style="color: #{{ $site->getConfiguration()->colour1 }};"><i class="fas fa-undo"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

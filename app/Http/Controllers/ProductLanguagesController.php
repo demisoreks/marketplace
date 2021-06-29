@@ -33,7 +33,7 @@ class ProductLanguagesController extends Controller
             Log::info('Product language was not added - '.$response['error']);
 
             return Redirect::route('products.show', $product->slug())
-                    ->with('error', Alert::format('Completed!', $response['error']));
+                    ->with('error', Alert::format('Error!', $response['error']));
         }
     }
 

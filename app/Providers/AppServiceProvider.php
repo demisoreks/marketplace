@@ -12,11 +12,15 @@ use App\Core\Languages\ILanguage;
 use App\Core\Languages\Language;
 use App\Core\Products\Categories\IProductCategory;
 use App\Core\Products\Categories\ProductCategory;
+use App\Core\Products\Faqs\IProductFaq;
+use App\Core\Products\Faqs\ProductFaq;
 use App\Core\Products\Features\IProductFeature;
 use App\Core\Products\Features\ProductFeature;
 use App\Core\Products\IProduct;
 use App\Core\Products\Languages\IProductLanguage;
 use App\Core\Products\Languages\ProductLanguage;
+use App\Core\Products\Plans\Codes\IProductPlanCode;
+use App\Core\Products\Plans\Codes\ProductPlanCode;
 use App\Core\Products\Plans\IProductPlan;
 use App\Core\Products\Plans\ProductPlan;
 use App\Core\Products\Product;
@@ -24,6 +28,8 @@ use App\Core\Products\Requirements\IProductRequirement;
 use App\Core\Products\Requirements\ProductRequirement;
 use App\Core\Products\Versions\IProductVersion;
 use App\Core\Products\Versions\ProductVersion;
+use App\Core\Resellers\IReseller;
+use App\Core\Resellers\Reseller;
 use App\Core\Vendors\IVendor;
 use App\Core\Vendors\Vendor;
 use App\Core\Versions\IVersion;
@@ -52,6 +58,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IProductLanguage::class, ProductLanguage::class);
         $this->app->bind(IProductVersion::class, ProductVersion::class);
         $this->app->bind(IProductPlan::class, ProductPlan::class);
+        $this->app->bind(IProductPlanCode::class, ProductPlanCode::class);
+        $this->app->bind(IProductFaq::class, ProductFaq::class);
+        $this->app->bind(IReseller::class, Reseller::class);
     }
 
     /**

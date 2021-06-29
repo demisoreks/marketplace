@@ -11,6 +11,8 @@ interface IProductFeature {
 
     public function createProductFeature(DProduct $product, $data);
 
+    public function updateProductFeature(DProductFeature $product_feature, $data);
+
     public function delete(DProductFeature $product_feature);
 
 }

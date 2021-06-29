@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Core\BillingIntervals\IBillingInterval;
 use App\Core\Products\Categories\IProductCategory;
+use App\Core\Products\Faqs\IProductFaq;
 use App\Core\Products\Features\IProductFeature;
 use App\Core\Products\IProduct;
 use App\Core\Products\Languages\IProductLanguage;
+use App\Core\Products\Plans\Codes\IProductPlanCode;
+use App\Core\Products\Plans\IProductPlan;
 use App\Core\Products\Requirements\IProductRequirement;
 use App\Core\Products\Versions\IProductVersion;
 use App\Core\Services\Alert;
@@ -23,8 +27,12 @@ class ProductsController extends Controller
     private $_product_feature;
     private $_product_language;
     private $_product_version;
+    private $_product_plan;
+    private $_product_plan_code;
+    private $_billing_interval;
+    private $_product_faq;
 
-    public function __construct(IProduct $product, IProductCategory $product_category, IProductRequirement $product_requirement, IProductFeature $product_feature, IProductLanguage $product_language, IProductVersion $product_version)
+    public function __construct(IProduct $product, IProductCategory $product_category, IProductRequirement $product_requirement, IProductFeature $product_feature, IProductLanguage $product_language, IProductVersion $product_version, IProductPlan $product_plan, IProductPlanCode $product_plan_code, IBillingInterval $billing_interval, IProductFaq $product_faq)
     {
         $this->_product = $product;
         $this->_product_category = $product_category;
@@ -32,6 +40,10 @@ class ProductsController extends Controller
         $this->_product_feature = $product_feature;
         $this->_product_language = $product_language;
         $this->_product_version = $product_version;
+        $this->_product_plan = $product_plan;
+        $this->_product_plan_code = $product_plan_code;
+        $this->_billing_interval = $billing_interval;
+        $this->_product_faq = $product_faq;
     }
 
     public function index() {
@@ -76,7 +88,13 @@ class ProductsController extends Controller
         $product_features = $this->_product_feature->getProductFeatures($product);
         $product_languages = $this->_product_language->getProductLanguages($product);
         $product_versions = $this->_product_version->getProductVersions($product);
-        return view('admin.products.show', compact('product', 'product_categories', 'product_requirements', 'product_features', 'product_languages', 'product_versions'));
+        $product_plans = $this->_product_plan->getProductPlans($product);
+        foreach ($product_plans as $product_plan) {
+            $product_plan->product_plan_codes = $this->_product_plan_code->getProductPlanCodes($product_plan);
+        }
+        $billing_intervals = $this->_billing_interval->getBillingIntervalsByActive(true);
+        $product_faqs = $this->_product_faq->getProductFaqs($product);
+        return view('admin.products.show', compact('product', 'product_categories', 'product_requirements', 'product_features', 'product_languages', 'product_versions', 'product_plans', 'billing_intervals', 'product_faqs'));
     }
 
     public function edit(DProduct $product) {

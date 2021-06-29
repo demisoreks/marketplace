@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title></title>
+        <title>{{ $site->getConfiguration()->name }} Admin @if(isset($page_title)) {{ " | ".$page_title }} @endif</title>
 
         <!-- Fonts -->
         {!! Html::style("https://fonts.googleapis.com/css?family=Maven+Pro") !!}
@@ -35,26 +35,26 @@
             }
 
             a {
-                color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};
+                color: #{{ $site->getConfiguration()->colour1 }};
             }
 
             a:hover {
-                color: #{{ json_decode(Cookie::get('configuration'))->colour2 }};
+                color: #{{ $site->getConfiguration()->colour2 }};
             }
 
             .page-item.active .page-link {
                 color: #fff !important;
-                background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }} !important;
+                background-color: #{{ $site->getConfiguration()->colour1 }} !important;
             }
 
             .page-link {
-                color: #{{ json_decode(Cookie::get('configuration'))->colour1 }} !important;
+                color: #{{ $site->getConfiguration()->colour1 }} !important;
                 background-color: #fff !important;
             }
 
             .page-link:hover {
                 color: #fff !important;
-                background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }} !important;
+                background-color: #{{ $site->getConfiguration()->colour1 }} !important;
             }
         </style>
 
@@ -127,10 +127,10 @@
     </head>
     <body style="background-color: #f6f7fb;">
         <div class="container-fluid" style="min-height: 100vh;">
-            <div class="row sticky-top shadow-sm bg-white" style="height: 70px; border-bottom: 1px solid #{{ json_decode(Cookie::get('configuration'))->colour1 }};">
+            <div class="row sticky-top shadow-sm bg-white" style="height: 70px; border-bottom: 1px solid #{{ $site->getConfiguration()->colour1 }};">
                 <div class="col-md-6">
                     <div class="text-white float-left" style="display: flex; align-items: center; justify-content: center; height: 100%;">
-                        <h3  class="font-weight-bold" style="color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};">{{ json_decode(Cookie::get('configuration'))->name }} Admin</h3>
+                        <h3  class="font-weight-bold" style="color: #{{ $site->getConfiguration()->colour1 }};">{{ $site->getConfiguration()->name }} Admin</h3>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -204,7 +204,7 @@
             </div>
             <div class="row">
                 <div class="col-12 justify-content-end text-right">
-                    <div style="border-top: 1px solid #{{ json_decode(Cookie::get('configuration'))->colour1 }}; margin-top: 20px; padding: 10px 0;">Powered by <a href="https://icit.ng" target="_blank">ICIT Solutions Nigeria</a></div>
+                    <div style="border-top: 1px solid #{{ $site->getConfiguration()->colour1 }}; margin-top: 20px; padding: 10px 0;">Powered by <a href="https://icit.ng" target="_blank">ICIT Solutions Nigeria</a></div>
                 </div>
             </div>
         </div>

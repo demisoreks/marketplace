@@ -24,6 +24,14 @@ Route::middleware('check.config')->group(function () {
         'as' => 'index', 'uses' => 'MainController@index'
     ]);
 
+    Route::get('category/{category}', [
+        'as' => 'category', 'uses' => 'MainController@category'
+    ]);
+
+    Route::get('enquiry', [
+        'as' => 'enquiry', 'uses' => 'MainController@enquiry'
+    ]);
+
     Route::prefix('admin')->group(function () {
         Route::get('/', [
             'as' => 'admin_index', 'uses' => 'AdminMainController@index'
@@ -152,6 +160,38 @@ Route::middleware('check.config')->group(function () {
             Route::bind('product_plans', function ($value, $route) {
                 return App\DProductPlan::findBySlug($value)->first();
             });
+
+            Route::resource('products.product_faqs', 'ProductFaqsController');
+            Route::bind('product_faqs', function ($value, $route) {
+                return App\DProductFaq::findBySlug($value)->first();
+            });
+        });
+    });
+
+    Route::prefix('pos')->group(function () {
+        Route::get('/', [
+            'as' => 'pos_index', 'uses' => 'PosMainController@index'
+        ]);
+        Route::post('authenticate', [
+            'as' => 'pos_authenticate', 'uses' => 'PosAuthenticateController@authenticate'
+        ]);
+        Route::get('logout', [
+            'as' => 'pos_logout', 'uses' => 'PosAuthenticateController@logout'
+        ]);
+        Route::get('register', [
+            'as' => 'pos_register', 'uses' => 'PosMainController@register'
+        ]);
+        Route::post('pos_create_account', [
+            'as' => 'pos_create_account', 'uses' => 'PosMainController@create_account'
+        ]);
+        Route::middleware('check.reseller')->group(function () {
+            Route::get('dashboard', [
+                'as' => 'pos_dashboard', 'uses' => 'PosMainController@dashboard'
+            ]);
+
+            Route::resource('customers', 'PosCustomersController', [
+                'as' => 'pos'
+            ]);
         });
     });
 });

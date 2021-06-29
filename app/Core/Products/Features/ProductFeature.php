@@ -4,10 +4,11 @@ namespace App\Core\Products\Features;
 
 use App\Core\Products\Features\Services\CreateProductFeature;
 use App\Core\Products\Features\Services\GetProductFeatures;
+use App\Core\Products\Features\Services\UpdateProductFeature;
 use App\Core\Services\Delete;
 
 class ProductFeature implements IProductFeature {
 
-    use GetProductFeatures, CreateProductFeature, Delete;
+    use GetProductFeatures, CreateProductFeature, UpdateProductFeature, Delete;
 
 }

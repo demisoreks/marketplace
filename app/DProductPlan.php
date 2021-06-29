@@ -14,7 +14,7 @@ class DProductPlan extends Model
     protected $guarded = [];
 
     public function product() {
-        return $this->belongsTo('App\DProductPlan');
+        return $this->belongsTo('App\DProduct');
     }
 
     public function productPlanCodes() {

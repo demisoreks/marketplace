@@ -12,7 +12,7 @@ trait GetBillingIntervals {
     }
 
     public function getBillingIntervalsByActive($active) {
-        $billing_intervals  = DBillingInterval::where('active', $active)->get();
+        $billing_intervals  = DBillingInterval::where('active', $active)->orderBy('months')->get();
         return $billing_intervals;
     }
 

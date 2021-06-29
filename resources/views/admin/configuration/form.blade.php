@@ -87,7 +87,7 @@
         @if (App\Core\Services\Configuration::get() == null)
         <button type="submit" class="btn btn-sm btn-secondary">{{ $submit_text }}</button>
         @else
-        <button type="submit" class="btn btn-sm" style="color: #fff; background-color: #{{ json_decode(Cookie::get('configuration'))->colour1 }};">{{ $submit_text }}</button>
+        <button type="submit" class="btn btn-sm" style="color: #fff; background-color: #{{ $site->getConfiguration()->colour1 }};">{{ $submit_text }}</button>
         @endif
     </div>
 </div>

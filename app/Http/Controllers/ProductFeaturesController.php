@@ -35,7 +35,30 @@ class ProductFeaturesController extends Controller
             Log::info('Product feature was not added - '.$response['error']);
 
             return Redirect::route('products.show', $product->slug())
-                    ->with('error', Alert::format('Completed!', $response['error']));
+                    ->with('error', Alert::format('Error!', $response['error']));
+        }
+    }
+
+    public function edit(DProduct $product, DProductFeature $product_feature) {
+        return view('admin.product_features.edit', compact('product', 'product_feature'));
+    }
+
+    public function update(DProduct $product, DProductFeature $product_feature, Request $request) {
+        $data = [
+            'feature' => $request->feature,
+            'highlight' => $request->highlight
+        ];
+        $response = $this->_product_feature->updateProductFeature($product_feature, $data);
+        if (isset($response['data'])) {
+            Log::info('Product feature was updated - '.$data['feature']);
+
+            return Redirect::route('products.show', $product->slug())
+                    ->with('success', Alert::format('Completed!', 'Product feature was updated.'));
+        } else {
+            Log::info('Product feature was not updated - '.$response['error']);
+
+            return Redirect::route('products.show', $product->slug())
+                    ->with('error', Alert::format('Error!', $response['error']));
         }
     }
 
