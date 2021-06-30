@@ -166,6 +166,7 @@
                                     <nav class="nav flex-column">
                                         <a class="nav-link" href="{{ route('pos_dashboard') }}"><i class="fa fa-chart-line"></i> Dashboard</a>
                                         <a class="nav-link" href="{{ route('pos.customers.index') }}"><i class="fa fa-users"></i> Customers</a>
+                                        <a class="nav-link" href="{{ route('pos.sales.index') }}"><i class="fa fa-shopping-cart"></i> Sales</a>
                                     </nav>
                                 </div>
                             </div>

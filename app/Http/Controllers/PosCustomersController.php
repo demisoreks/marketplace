@@ -22,8 +22,9 @@ class PosCustomersController extends Controller
     }
 
     public function index() {
-        $customers = $this->reseller_api->getCustomers($this->_reseller->getId());
-        return view('pos.customers.index', compact('customers'));
+        $reseller_id = $this->_reseller->getId();
+        $customers = $this->reseller_api->getCustomers($reseller_id);
+        return view('pos.customers.index', compact('customers', 'reseller_id'));
     }
 
     public function create() {

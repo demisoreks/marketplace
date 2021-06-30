@@ -32,8 +32,8 @@ class ResellerApi {
                 $product_providers = $response->getBody()->getContents();
                 Cache::put('product_providers', $product_providers, 3600);
             } catch (ClientException $e) {
-                dd($e->getResponse()->getBody()->getContents());
-                //return null;
+                //dd($e->getResponse()->getBody()->getContents());
+                return null;
             }
         }
 
@@ -51,8 +51,8 @@ class ResellerApi {
                 return null;
             }
         } catch (ClientException $e) {
-            dd($e->getResponse()->getBody()->getContents());
-            //return null;
+            //dd($e->getResponse()->getBody()->getContents());
+            return null;
         }
     }
 
@@ -66,8 +66,8 @@ class ResellerApi {
                 return null;
             }
         } catch (ClientException $e) {
-            dd($e->getResponse()->getBody()->getContents());
-            //return null;
+            //dd($e->getResponse()->getBody()->getContents());
+            return null;
         }
     }
 
@@ -82,8 +82,8 @@ class ResellerApi {
                 return null;
             }
         } catch (ClientException $e) {
-            dd($e->getResponse()->getBody()->getContents());
-            //return null;
+            //dd($e->getResponse()->getBody()->getContents());
+            return null;
         }
     }
 
@@ -98,8 +98,8 @@ class ResellerApi {
                 return null;
             }
         } catch (ClientException $e) {
-            dd($e->getResponse()->getBody()->getContents());
-            //return null;
+            //dd($e->getResponse()->getBody()->getContents());
+            return null;
         }
     }
 
@@ -131,6 +131,22 @@ class ResellerApi {
         }
 
         return $customer;
+    }
+
+    public function getProducts() {
+        if (Cache::get('products') == null) {
+            try {
+                $response = $this->client->request('GET', '/Products\/');
+                if ($response->getStatusCode() == 200) {
+                    $products = json_decode($response->getBody()->getContents());
+                    Cache::put('products', $products, 3600);
+                }
+            } catch (ClientException $e) {
+                //dd($e->getResponse()->getBody()->getContents());
+                //return null;
+            }
+        }
+        return Cache::get('products');
     }
 
 }

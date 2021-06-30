@@ -25,7 +25,7 @@
                                     <th><strong>COMPANY NAME</strong></th>
                                     <th><strong>PHONE NUMBER</strong></th>
                                     <th><strong>EMAIL ADDRESS</strong></th>
-                                    <th width="10%" data-priority="1">&nbsp;</th>
+                                    <th width="15%" data-priority="1">&nbsp;</th>
                                     <th width="10%" data-priority="1">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -36,7 +36,7 @@
                                     <td>{{ $customer->phone }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>
-                                        <a class="btn btn-sm" href="{{ route('pos.customers.sales.store', [$customer->id]) }}" style="background-color: #{{ $site->getConfiguration()->colour1 }}; color: #fff;">Sell</a>
+                                        <a class="btn btn-sm btn-block" href="{{ route('pos.sales.new', [$customer->id]) }}" style="background-color: #{{ $site->getConfiguration()->colour1 }}; color: #fff;">New Sale</a>
                                     </td>
                                     <td class="text-center">
                                         <a title="Edit" href="{{ route('pos.customers.edit', [$customer->id]) }}" style="color: #{{ $site->getConfiguration()->colour1 }};"><i class="fas fa-edit"></i></a>

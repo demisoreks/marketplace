@@ -193,7 +193,25 @@ Route::middleware('check.config')->group(function () {
                 'as' => 'pos'
             ]);
 
-            Route::resource('customers.sales', 'PosSalesController', [
+            Route::get('sales/new/{customer_id}', [
+                'as' => 'pos.sales.new', 'uses' => 'PosSalesController@new'
+            ]);
+            Route::get('sales/{sale}/currency/{currency}', [
+                'as' => 'pos.sales.currency', 'uses' => 'PosSalesController@currency'
+            ]);
+            Route::get('sales/{sale}/add/{product_id}', [
+                'as' => 'pos.sales.add', 'uses' => 'PosSalesController@add'
+            ]);
+            Route::get('sales/{sales_item}/increase', [
+                'as' => 'pos.sales.increase', 'uses' => 'PosSalesController@increase'
+            ]);
+            Route::get('sales/{sales_item}/reduce', [
+                'as' => 'pos.sales.reduce', 'uses' => 'PosSalesController@reduce'
+            ]);
+            Route::get('sales/{sales_item}/remove', [
+                'as' => 'pos.sales.remove', 'uses' => 'PosSalesController@remove'
+            ]);
+            Route::resource('sales', 'PosSalesController', [
                 'as' => 'pos'
             ]);
         });
