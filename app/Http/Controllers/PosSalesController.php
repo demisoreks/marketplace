@@ -8,6 +8,7 @@ use App\Sale;
 use App\SalesItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Yabacon\Paystack;
 
 class PosSalesController extends Controller
 {
@@ -128,6 +129,21 @@ class PosSalesController extends Controller
     public function remove(SalesItem $sales_item) {
         $sales_item->delete();
         return Redirect::route('pos.sales.show', [$sales_item->sale->slug()]);
+    }
+
+    public function checkout(Sale $sale, Request $request) {
+        $paystack = new Paystack('sk_test_57ae7adc53e833512473c193c40b5c412ef71bb0');
+        try {
+            $transaction = $paystack->transaction->initialize([
+                'amount' => 5000,
+                'email' => 'demiladesoremekun@gmail.com',
+                'reference' => 'YYYYYYYYY'.$sale->id,
+                'callback_url' => $request->root().'/pos/sales'
+            ]);
+        } catch (Paystack\Exception\ApiException $ex) {
+            //ErrorController::log('Payment', 'Payment failed - '.$ex->getMessage().'.', $customer['EmailAddress']);
+            //return ['status' => false, 'detail' => $ex->getMessage()];
+        }
     }
 
 }

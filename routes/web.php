@@ -211,6 +211,9 @@ Route::middleware('check.config')->group(function () {
             Route::get('sales/{sales_item}/remove', [
                 'as' => 'pos.sales.remove', 'uses' => 'PosSalesController@remove'
             ]);
+            Route::post('sales/{sale}/checkout', [
+                'as' => 'pos.sales.checkout', 'uses' => 'PosSalesController@checkout'
+            ]);
             Route::resource('sales', 'PosSalesController', [
                 'as' => 'pos'
             ]);
