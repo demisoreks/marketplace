@@ -15,6 +15,7 @@ class Site {
     use GetCategories, GetProducts, GetProductPlans, GetProductPlanCodes;
 
     public function getConfiguration() {
+        return Configuration::get();
         if (Cache::get('configuration') == null) {
             Cache::put('configuration', Configuration::get(), 3600);
         }
