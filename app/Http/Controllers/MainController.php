@@ -17,7 +17,7 @@ class MainController extends Controller
 
     public function __construct(IProduct $product)
     {
-        $site = new Site;
+        $this->site = new Site;
         $this->_product = $product;
     }
 
@@ -26,16 +26,11 @@ class MainController extends Controller
     }
 
     public function category(DCategory $category) {
-        if ($category == "all") {
-            $products = $this->_product->getProductsByActive(true);
-        } else {
-            $products = $this->_product->getProductsByCategory($category);
-        }
+        $products = $this->_product->getProductsByCategory($category);
         foreach ($products as $product) {
             $product->starting_price = $this->site->getProductMinimumPrice($product);
         }
-dd($products);
-        return view('category', compact('products'));
+        return view('category', compact('products', 'category'));
     }
 
 }

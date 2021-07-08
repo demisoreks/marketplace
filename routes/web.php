@@ -28,6 +28,10 @@ Route::middleware('check.config')->group(function () {
         'as' => 'category', 'uses' => 'MainController@category'
     ]);
 
+    Route::get('product/{product}', [
+        'as' => 'product', 'uses' => 'MainController@product'
+    ]);
+
     Route::get('enquiry', [
         'as' => 'enquiry', 'uses' => 'MainController@enquiry'
     ]);

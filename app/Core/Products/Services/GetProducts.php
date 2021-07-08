@@ -4,6 +4,7 @@ namespace App\Core\Products\Services;
 
 use App\DCategory;
 use App\DProduct;
+use App\DProductCategory;
 
 trait GetProducts {
 
@@ -23,7 +24,7 @@ trait GetProducts {
     }
 
     public function getProductsByCategory(DCategory $category) {
-        $products = DProduct::where('active', true)->where('category_id', $category->id)->get();
+        $products = DProduct::where('active', true)->whereIn('id', DProductCategory::where('category_id', $category->id)->pluck('product_id')->toArray())->get();
         return $products;
     }
 

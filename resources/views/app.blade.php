@@ -128,7 +128,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                         @foreach($site->getCategoriesByActive(true) as $category)
-                                        <a class="dropdown-item" href="{{ route('products', $category->slug()) }}">{{ Html::image($category->logo_url, '', ['height' => '30']) }} {{ $category->name }}</a>
+                                        <a class="dropdown-item" href="{{ route('category', $category->slug()) }}">{{ Html::image($category->logo_url, '', ['height' => '30']) }} {{ $category->name }}</a>
                                         @endforeach
                                     </div>
                                 </li>
@@ -185,7 +185,7 @@
                                 </div>
                                 @foreach($site->getCategoriesByActive(true) as $category)
                                 <div class="col-sm-6">
-                                    <a class="text-white" href="{{ route('products', $category->slug()) }}">{{ $category->name }}</a>
+                                    <a class="text-white" href="{{ route('category', $category->slug()) }}">{{ $category->name }}</a>
                                 </div>
                                 @endforeach
                             </div>
