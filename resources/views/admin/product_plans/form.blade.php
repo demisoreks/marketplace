@@ -5,6 +5,12 @@
     </div>
 </div>
 <div class="form-group row">
+    {!! Form::label('version_id', 'Version *', ['class' => 'col-md-2 col-form-label']) !!}
+    <div class="col-md-4">
+        {!! Form::select('version_id', $versions, $value = null, ['class' => 'form-control', 'placeholder' => '- Select Option -', 'required' => true]) !!}
+    </div>
+</div>
+<div class="form-group row">
     {!! Form::label('features', 'Features', ['class' => 'col-md-2 col-form-label']) !!}
     <div class="col-md-4">
         @foreach ($product_features as $product_feature)

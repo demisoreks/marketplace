@@ -77,18 +77,15 @@
                     <div class="text-center" style="padding: 20px 0;">
                         {{ Html::image($featured_product->logo_url, $featured_product->name, ['height' => '100px']) }}
                     </div>
-                    <div style="background: none; padding: 10px 0; border-top: 1px solid #{{ $site->getConfiguration()->colour1 }};">
+                    <div class="text-center" style="background: none; padding: 10px 0; border-top: 1px solid #{{ $site->getConfiguration()->colour1 }};">
                         <h5 class="font-weight-bold" style="color: #{{ $site->getConfiguration()->colour1 }};">{{ $featured_product->name }}</h5>
-                        <div class="input-group mb-3">
-                            @php
-                                $starts_at = "";
-                                if ($featured_product->starting_price > 0) {
-                                    $starts_at = 'From &#x20A6;'.number_format($featured_product->starting_price, 2);
-                                }
-                            @endphp
-                            {!! Form::text('price', $value = $starts_at, ['class' => 'form-control', 'disabled' => true, 'aria-describedby' => 'product'.$featured_product->id, 'style' => 'background-color: transparent; border: 1px solid #{{ $site->getConfiguration()->colour1 }}; color: #{{ $site->getConfiguration()->colour1 }}; border-radius: 0;']) !!}
-                            <a class="input-group-text" id="{{ 'product'.$featured_product->id }}" style="border-radius: 0; background-color: #{{ $site->getConfiguration()->colour1 }}; border: 1px solid #{{ $site->getConfiguration()->colour1 }}; color: #fff;" href="{{ route('product', $featured_product->slug()) }}">BUY NOW</a>
-                        </div>
+                        @if($featured_product->starting_price > 0)
+                            From &#x20A6;{{ number_format($featured_product->starting_price, 2) }}
+                        @else
+                            Best prices
+                        @endif
+                        <a class="btn btn-sm btn-block" href="{{ route('product', $featured_product->slug()) }}" style="background-color: #{{ $site->getConfiguration()->colour1 }}; border: 1px solid #{{ $site->getConfiguration()->colour1 }}; color: #fff; border-radius: 0; margin-bottom: 5px;">View Details</a>
+                        <a class="btn btn-sm btn-block" href="{{ route('plans', $featured_product->slug()) }}" style="background-color: transparent; border: 1px solid #{{ $site->getConfiguration()->colour1 }}; color: #{{ $site->getConfiguration()->colour1 }}; border-radius: 0;">Buy Now</a>
                     </div>
                 </div>
             </div>

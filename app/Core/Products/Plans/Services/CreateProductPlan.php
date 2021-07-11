@@ -17,6 +17,7 @@ trait CreateProductPlan {
             $product_plan = DProductPlan::create([
                 'product_id' => $product->id,
                 'name' => $data['name'],
+                'version_id' => $data['version_id'],
                 'features' => $data['features']
             ]);
             if ($product_plan) {

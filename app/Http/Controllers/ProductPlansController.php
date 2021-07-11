@@ -6,6 +6,7 @@ use App\Core\BillingIntervals\IBillingInterval;
 use App\Core\Products\Features\IProductFeature;
 use App\Core\Products\Plans\Codes\IProductPlanCode;
 use App\Core\Products\Plans\IProductPlan;
+use App\Core\Products\Versions\IProductVersion;
 use App\Core\Services\Alert;
 use App\Core\Services\Log;
 use App\DProduct;
@@ -20,19 +21,26 @@ class ProductPlansController extends Controller
     private $_product_feature;
     private $_billing_interval;
     private $_product_plan_code;
+    private $_product_version;
 
-    public function __construct(IProductPlan $product_plan, IProductFeature $product_feature, IBillingInterval $billing_interval, IProductPlanCode $product_plan_code)
+    public function __construct(IProductPlan $product_plan, IProductFeature $product_feature, IBillingInterval $billing_interval, IProductPlanCode $product_plan_code, IProductVersion $product_version)
     {
         $this->_product_plan = $product_plan;
         $this->_product_feature = $product_feature;
         $this->_billing_interval = $billing_interval;
         $this->_product_plan_code = $product_plan_code;
+        $this->_product_version = $product_version;
     }
 
     public function create(DProduct $product) {
         $product_features = $this->_product_feature->getProductFeatures($product);
         $billing_intervals = $this->_billing_interval->getBillingIntervalsByActive(true);
-        return view('admin.product_plans.create', compact('product', 'product_features', 'billing_intervals'));
+        $product_versions = $this->_product_version->getProductVersions($product);
+        $versions = [];
+        foreach ($product_versions as $product_version) {
+            $versions[$product_version->version_id] = $product_version->version->name;
+        }
+        return view('admin.product_plans.create', compact('product', 'product_features', 'billing_intervals', 'versions'));
     }
 
     public function store(DProduct $product, Request $request) {
@@ -46,6 +54,7 @@ class ProductPlansController extends Controller
         }
         $product_plan_data = [
             'name' => $request->name,
+            'version_id' => $request->version_id,
             'features' => implode(',', $product_plan_features)
         ];
         $product_plan_response = $this->_product_plan->createProductPlan($product, $product_plan_data);
@@ -83,7 +92,12 @@ class ProductPlansController extends Controller
         $product_features = $this->_product_feature->getProductFeatures($product);
         $billing_intervals = $this->_billing_interval->getBillingIntervalsByActive(true);
         $features = explode(',', $product_plan->features);
-        return view('admin.product_plans.edit', compact('product', 'product_plan', 'product_features', 'billing_intervals', 'features'));
+        $product_versions = $this->_product_version->getProductVersions($product);
+        $versions = [];
+        foreach ($product_versions as $product_version) {
+            $versions[$product_version->version_id] = $product_version->version->name;
+        }
+        return view('admin.product_plans.edit', compact('product', 'product_plan', 'product_features', 'billing_intervals', 'features', 'versions'));
     }
 
     public function update(DProduct $product, DProductPlan $product_plan, Request $request) {
@@ -97,6 +111,7 @@ class ProductPlansController extends Controller
         }
         $product_plan_data = [
             'name' => $request->name,
+            'version_id' => $request->version_id,
             'features' => implode(',', $product_plan_features)
         ];
         $product_plan_response = $this->_product_plan->updateProductPlan($product_plan, $product_plan_data);

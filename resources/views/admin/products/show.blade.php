@@ -235,6 +235,10 @@
                                         @endforeach
                                     </div>
                                     <div class="col-md-6">
+                                        @if ($product_plan->version_id != 0)
+                                        <span class="font-weight-bold">Version</span><br />
+                                        {{ App\DVersion::find($product_plan->version_id)->name }}<br /><br />
+                                        @endif
                                         <span class="font-weight-bold">Plan Codes</span><br />
                                         @foreach($billing_intervals as $billing_interval)
                                             @if (App\DProductPlanCode::where('product_plan_id', $product_plan->id)->where('billing_interval_id', $billing_interval->id)->count() > 0)
