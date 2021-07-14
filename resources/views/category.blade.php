@@ -1,4 +1,4 @@
-@extends('app', ['page_title' => 'Home'])
+@extends('app', ['page_title' => $category->name])
 
 @section('content')
 <div class="row" style="background-image: url({{ $category->image_url }}); background-repeat: no-repeat; background-size: cover; padding: 100px 0;">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="text-center" style="background: none; padding: 10px 0; border-top: 1px solid #{{ $site->getConfiguration()->colour1 }};">
                         <h5 class="font-weight-bold" style="color: #{{ $site->getConfiguration()->colour1 }};">{{ $product->name }}</h5>
-                        @if($product->starting_price > 0)
+                        @if ($product->starting_price > 0)
                             From &#x20A6;{{ number_format($product->starting_price, 2) }}
                         @else
                             Best prices
