@@ -7,6 +7,7 @@ use App\Core\Products\Plans\Codes\Services\GetProductPlanCodes;
 use App\Core\Products\Plans\Services\GetProductPlans;
 use App\Core\Products\Services\GetProducts;
 use App\DProduct;
+use App\DProductPlanCode;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 
@@ -63,6 +64,18 @@ class Site {
         } else {
             return min($prices);
         }
+    }
+
+    public function getProductPlanPrice(DProductPlanCode $product_plan_code) {
+        $back_office = new BackOffice;
+        $plans = json_decode($back_office->getProductPlans());
+        foreach ($plans as $plan) {
+            if ($plan->PlanCode == $product_plan_code->code) {
+                return $plan->RecurringPrice;
+            }
+        }
+
+        return null;
     }
 
 }

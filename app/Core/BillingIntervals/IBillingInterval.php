@@ -3,12 +3,16 @@
 namespace App\Core\BillingIntervals;
 
 use App\DBillingInterval;
+use App\DProduct;
+use App\DVersion;
 
 interface IBillingInterval {
 
     public function getBillingIntervals();
 
     public function getBillingIntervalsByActive($active);
+
+    public function getBillingIntervalsByProductAndVersion(DProduct $product, DVersion $version);
 
     public function createBillingInterval($data);
 

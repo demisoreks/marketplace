@@ -57,6 +57,11 @@
                 background-color: #{{ $site->getConfiguration()->colour1 }} !important;
             }
 
+            .nav-link.active {
+                color: #fff !important;
+                background-color: #{{ $site->getConfiguration()->colour1 }} !important;
+            }
+
             .slide-text {
                 position: absolute;
                 bottom: 20%;
