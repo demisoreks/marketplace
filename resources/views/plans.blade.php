@@ -61,7 +61,7 @@
                                                         <td class="text-center">
                                                             @if ($product_plan_code->price)
                                                             <h5 class="font-weight-bold">&#x20A6;{{ number_format($product_plan_code->price, 2) }}</h5>
-                                                            <a class="btn btn-sm" href="#" style="background-color: transparent; border: 1px solid #{{ $site->getConfiguration()->colour1 }}; color: #{{ $site->getConfiguration()->colour1 }}; border-radius: 0;">Buy Now</a>
+                                                            <a class="btn btn-sm" href="{{ route('cart.add', $product_plan_code->slug()) }}" style="background-color: transparent; border: 1px solid #{{ $site->getConfiguration()->colour1 }}; color: #{{ $site->getConfiguration()->colour1 }}; border-radius: 0;">Buy Now</a>
                                                             @endif
                                                         </td>
                                                         @endforeach

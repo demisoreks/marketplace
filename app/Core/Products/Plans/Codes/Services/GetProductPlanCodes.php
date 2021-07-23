@@ -25,4 +25,9 @@ trait GetProductPlanCodes {
         return $product_plan_codes;
     }
 
+    public function getProductPlanCodeByCode($code) {
+        $product_plan_code = DProductPlanCode::where('code', $code)->first();
+        return $product_plan_code;
+    }
+
 }

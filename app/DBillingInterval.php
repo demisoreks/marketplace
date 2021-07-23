@@ -12,4 +12,8 @@ class DBillingInterval extends Model
     protected $table = "billing_intervals";
 
     protected $guarded = [];
+
+    public function productPlanCodes() {
+        return $this->hasMany('App\DProductPlanCode');
+    }
 }

@@ -36,6 +36,22 @@ Route::middleware('check.config')->group(function () {
         'as' => 'plans', 'uses' => 'MainController@plans'
     ]);
 
+    Route::get('cart', [
+        'as' => 'cart', 'uses' => 'CartController@index'
+    ]);
+
+    Route::get('cart/add/{product_plan_code}', [
+        'as' => 'cart.add', 'uses' => 'CartController@add'
+    ]);
+
+    Route::get('cart/reduce/{product_plan_code}', [
+        'as' => 'cart.reduce', 'uses' => 'CartController@reduce'
+    ]);
+
+    Route::get('cart/remove/{product_plan_code}', [
+        'as' => 'cart.remove', 'uses' => 'CartController@remove'
+    ]);
+
     Route::get('enquiry', [
         'as' => 'enquiry', 'uses' => 'MainController@enquiry'
     ]);

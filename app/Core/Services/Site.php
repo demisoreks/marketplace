@@ -78,4 +78,25 @@ class Site {
         return null;
     }
 
+    public function getProductPlanDetails(DProductPlanCode $product_plan_code) {
+        $back_office = new BackOffice;
+        $plans = json_decode($back_office->getProductPlans());
+        foreach ($plans as $plan) {
+            if ($plan->PlanCode == $product_plan_code->code) {
+                return $plan;
+            }
+        }
+
+        return null;
+    }
+
+    public function getProductPlanCode($code) {
+        return $this->getProductPlanCodeByCode($code);
+    }
+
+    public function getCartCount() {
+        $cart = new Cart;
+        return $cart->getCount();
+    }
+
 }

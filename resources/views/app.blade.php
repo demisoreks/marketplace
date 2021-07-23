@@ -141,7 +141,7 @@
                                     <a class="nav-link text-dark" href="{{ route('enquiry') }}">ENQUIRY</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="#"><i class="fa fa-shopping-cart"><sup class="badge badge-danger">@if (Cookie::has('cart')) {{ count(Cookie::get('cart')) }} @else 0 @endif</sup></i></a>
+                                    <a class="nav-link text-dark" href="{{ route('cart') }}"><i class="fa fa-shopping-cart">@if (Cookie::has('cart_id'))<sup class="badge badge-danger">{{ $site->getCartCount() }}</sup>@endif</i></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" href="#"><i class="fa fa-search"></i></a>

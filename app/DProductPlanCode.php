@@ -16,4 +16,8 @@ class DProductPlanCode extends Model
     public function productPlan() {
         return $this->belongsTo('App\DProductPlan');
     }
+
+    public function billingInterval() {
+        return $this->belongsTo('App\DBillingInterval');
+    }
 }
