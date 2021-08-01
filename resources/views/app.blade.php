@@ -146,12 +146,21 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" href="#"><i class="fa fa-search"></i></a>
                                 </li>
+                                @if (Cookie::has('icommerce_customer'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">LOG IN</a>
+                                    <a class="nav-link" href="{{ route('customer.profile') }}">ACCOUNT</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">CREATE ACCOUNT</a>
+                                    <a class="nav-link" href="{{ route('logout') }}">LOG OUT</a>
                                 </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">CREATE ACCOUNT</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">LOG IN</a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </nav>

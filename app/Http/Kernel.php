@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'check.admin' => \App\Http\Middleware\CheckAdmin::class,
         'check.config' => \App\Http\Middleware\CheckConfiguration::class,
         'check.reseller' => \App\Http\Middleware\CheckReseller::class,
+        'check.customer' => \App\Http\Middleware\CheckCustomer::class,
     ];
 }

@@ -56,6 +56,40 @@ Route::middleware('check.config')->group(function () {
         'as' => 'enquiry', 'uses' => 'MainController@enquiry'
     ]);
 
+    Route::get('register', [
+        'as' => 'register', 'uses' => 'CustomerController@create'
+    ]);
+
+    Route::get('login', [
+        'as' => 'login', 'uses' => 'CustomerController@login'
+    ]);
+
+    Route::post('authenticate', [
+        'as' => 'authenticate', 'uses' => 'CustomerController@authenticate'
+    ]);
+
+    Route::get('logout', [
+        'as' => 'logout', 'uses' => 'CustomerController@logout'
+    ]);
+
+    Route::post('customer/store', [
+        'as' => 'customer.store', 'uses' => 'CustomerController@store'
+    ]);
+
+    Route::middleware('check.customer')->group(function () {
+        Route::get('profile', [
+            'as' => 'customer.profile', 'uses' => 'CustomerController@profile'
+        ]);
+
+        Route::post('checkout', [
+            'as' => 'checkout', 'uses' => 'CartController@checkout'
+        ]);
+
+        Route::get('paymentCallback', [
+            'as' => 'paymentCallback', 'uses' => 'CartController@paymentCallback'
+        ]);
+    });
+
     Route::prefix('admin')->group(function () {
         Route::get('/', [
             'as' => 'admin_index', 'uses' => 'AdminMainController@index'

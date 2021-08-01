@@ -136,4 +136,24 @@ class Cart {
         }
     }
 
+    public function placeOrder($amount) {
+        try {
+            $response = $this->client->post('/Orders', [
+                'query' => [
+                    'cartId' => Cookie::get('cart_id'),
+                    'crmAccountId' => Cookie::get('icommerce_customer_crm'),
+                    'chargedAmount' => $amount
+                ]
+            ]);
+            $resp = json_decode($response->getBody()->getContents());
+            if ($resp->ResponseCode == 0) {
+                return true;
+            }
+        } catch (ClientException $e) {
+            dd($e->getResponse()->getBody()->getContents());
+        }
+
+        return false;
+    }
+
 }

@@ -61,7 +61,15 @@ class ConfigurationController extends Controller
     }
 
     public function edit() {
-        return view('admin.configuration.edit');
+        $configuration = Configuration::get();
+        if ($configuration->fixed_charge == 0 && $configuration->percent_charge == 0) {
+            $configuration->charge_type = 'N';
+        } else if ($configuration->fixed_charge == 0) {
+            $configuration->charge_type = 'P';
+        } else {
+            $configuration->charge_type = 'F';
+        }
+        return view('admin.configuration.edit', compact('configuration'));
     }
 
     public function update(Request $request) {
@@ -73,8 +81,22 @@ class ConfigurationController extends Controller
             'email' => $request->email,
             'colour1' => $request->colour1,
             'colour2' => $request->colour2,
-            'logo_url' => $request->logo_url
+            'logo_url' => $request->logo_url,
+            'vat_percent' => $request->vat_percent
         ];
+        if ($request->charge_type == 'F') {
+            $data['fixed_charge'] = $request->fixed_charge;
+            $data['percent_charge'] = 0;
+            $data['max_charge'] = 0;
+        } else if ($request->charge_type == 'P') {
+            $data['fixed_charge'] = 0;
+            $data['percent_charge'] = $request->percent_charge;
+            $data['max_charge'] = $request->max_charge;
+        } else {
+            $data['fixed_charge'] = 0;
+            $data['percent_charge'] = 0;
+            $data['max_charge'] = 0;
+        }
         Configuration::update($data);
 
         Log::info('Configuration was updated.');

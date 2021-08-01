@@ -82,12 +82,74 @@
     </div>
 </div>
 @endif
+@if (App\Core\Services\Configuration::get() != null)
+<legend style="margin-bottom: 0;">Charges</legend>
+<span class="text-danger">For VAT and other additional charges<br /><br /></span>
+<div class="form-group row">
+    {!! Form::label('vat_percent', 'VAT *', ['class' => 'col-md-2 col-form-label']) !!}
+    <div class="col-md-4">
+        <div class="input-group">
+            {!! Form::number('vat_percent', $value = null, ['class' => 'form-control', 'placeholder' => 'Value Added Tax', 'required' => true, 'step' => 0.01]) !!}
+            <div class="input-group-append">
+                <span class="input-group-text">%</span>
+            </div>
+        </div>
+        <small class="text-danger">Leave as '0' if VAT is already included in product price</small>
+    </div>
+</div>
+<div class="form-group row">
+    {!! Form::label('charge_type', 'Charge Type', ['class' => 'col-md-2 col-form-label']) !!}
+    <div class="col-md-4">
+        {!! Form::select('charge_type', ['N' => 'No Charge', 'F' => 'Fixed Charge', 'P' => 'Percentage Charge'], $value = null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group row fixed-charge" @if ($configuration->fixed_charge == 0) style="display: none;" @endif>
+    {!! Form::label('fixed_charge', 'Fixed Charge *', ['class' => 'col-md-2 col-form-label']) !!}
+    <div class="col-md-4">
+        {!! Form::number('fixed_charge', $value = null, ['class' => 'form-control', 'placeholder' => 'Fixed Charge', 'step' => 0.01]) !!}
+    </div>
+</div>
+<div class="form-group row percent-charge" @if ($configuration->percent_charge == 0) style="display: none;" @endif>
+    {!! Form::label('percent_charge', 'Percentage Charge *', ['class' => 'col-md-2 col-form-label']) !!}
+    <div class="col-md-4">
+        <div class="input-group">
+            {!! Form::number('percent_charge', $value = null, ['class' => 'form-control', 'placeholder' => 'Percentage Charge', 'step' => 0.01]) !!}
+            <div class="input-group-append">
+                <span class="input-group-text">%</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row percent-charge" @if ($configuration->percent_charge == 0) style="display: none;" @endif>
+    {!! Form::label('max_charge', 'Maximum Charge *', ['class' => 'col-md-2 col-form-label']) !!}
+    <div class="col-md-4">
+        {!! Form::number('max_charge', $value = null, ['class' => 'form-control', 'placeholder' => 'Maximum Charge', 'step' => 0.01]) !!}
+        <small class="text-danger">Leave as '0' if there is no cap</small>
+    </div>
+</div>
+@endif
 <div class="form-group row">
     <div class="col-md-10 offset-md-2">
         @if (App\Core\Services\Configuration::get() == null)
-        <button type="submit" class="btn btn-sm btn-secondary">{{ $submit_text }}</button>
+        <button type="submit" class="bn btn-sm btn-secondary">{{ $submit_text }}</button>
         @else
         <button type="submit" class="btn btn-sm" style="color: #fff; background-color: #{{ $site->getConfiguration()->colour1 }};">{{ $submit_text }}</button>
         @endif
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#charge_type').change(function () {
+        var charge_type = $('#charge_type').val();
+        if (charge_type == 'F') {
+            $('.fixed-charge').slideDown(1000);
+            $('.percent-charge').slideUp(100);
+        } else if (charge_type == 'P') {
+            $('.percent-charge').slideDown(1000);
+            $('.fixed-charge').slideUp(100);
+        } else {
+            $('.fixed-charge').slideUp(1000);
+            $('.percent-charge').slideUp(100);
+        }
+    });
+</script>
